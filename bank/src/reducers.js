@@ -1,4 +1,4 @@
-import { SELECT_ACCOUNT, DEPOSIT } from './actions';
+import { SELECT_ACCOUNT, DEPOSIT, WITHDRAW } from './actions';
 
 const initialState = {
   accounts: [
@@ -34,6 +34,16 @@ function bank(state = initialState, action) {
           return {
           ...account,
           balance: account.balance + action.data.amount
+          }
+        }
+        return account
+        })
+    case WITHDRAW:
+      return state.accounts.map(account => {
+        if (account.id === action.data.id) {
+          return {
+          ...account,
+          balance: account.balance - action.data.amount
           }
         }
         return account
